@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin: edit article</title>
+</head>
+<body>
+    <div id="edit_article">
+        <form id="editArticle" method="POST" action="/admin/edit/{{ one_article.id }}">
+            <p>
+                <label for="title">Title:</label><br>
+                <input type="text" id="new_title" name="new_title" value="{{ one_article.title }}"><br>
+                <label for="content">Content:</label><br>
+                <input type="text" id="new_content" name="new_content" value="{{ one_article.content }}"><br>
+                <button type="submit">Edit Article</button>
+            </p>
+        </form>
+    </div>
+</body>

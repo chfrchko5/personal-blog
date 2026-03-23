@@ -12,6 +12,10 @@
             <li>
                 Article: {{ article.id }} -
                 Title: {{ article.title }}
+
+                <a href="{{ url_for('edit_article', id=article.id) }}" target="_self" rel="noopener noreferrer">
+                    <button type="button">Edit Article</button>
+                </a>
             </li>
         {% endfor %}
     </ul>

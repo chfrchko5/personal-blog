@@ -1,8 +1,16 @@
 [
     {
         "id": 1,
-        "title": "my first article",
+        "title": "my first article 123 123 ",
         "date": "03-23-2026",
-        "content": "sample"
+        "content": "sample12 3123 12",
+        "date_edited": "03-23-2026"
+    },
+    {
+        "id": 2,
+        "title": "my second article",
+        "date": "03-23-2026",
+        "content": "edited content wasup",
+        "date_edited": "03-23-2026"
     }
 ]
