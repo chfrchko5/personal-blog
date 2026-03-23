@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin: new article</title>
+</head>
+<body>
+    <div id="new_article">
+        <form id="newArticle" method="POST" action="/admin/new">
+            <p>
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title"><br>
+                <label for="content">Content:</label><br>
+                <input type="text" id="content" name="content"><br>
+                <button type="submit">Add Article</button>
+            </p>
+
+            <p>
+                <a href="{{ url_for('admin_page') }}" target="_self" rel="noopener noreferrer">
+                    <button type="button">Admin Dashboard</button>
+                </a>
+            </p>
+        </form>
+    </div>
+</body>
