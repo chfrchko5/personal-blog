@@ -11,7 +11,7 @@
         {% for article in articles %}
             <li>
                 Article: {{ article.id }} -
-                Title: {{ article.title }}
+                <a href="{{ url_for('article', id=article.id) }}">Title: {{ article.title }}</a>
                 Date: {{ article.date }}
             </li>
         {% endfor %}

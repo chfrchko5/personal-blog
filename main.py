@@ -5,6 +5,7 @@ import datetime
 
 guest_file = "guest.html"
 admin_file = "admin.html"
+article_file = "article.html"
 articles_json = "blog/articles.json"
 
 app = Flask(__name__)
@@ -25,6 +26,18 @@ def guest_page():
         articles = json.load(f)
         f.close()
     return render_template(guest_file, articles = articles)
+
+@app.route("/article/<id>")
+def article(id):
+    articles = []
+    with open(articles_json, 'r') as f:
+        articles = json.load(f)
+
+    for article in articles:
+        if article['id'] == id:
+            return article
+        
+    return render_template(article_file, one_article = article)
 
 # admin dashboard, log in via username and password
 # is used to add, edit, and delete articles
