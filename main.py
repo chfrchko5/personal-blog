@@ -17,6 +17,7 @@ app.config['BASIC_AUTH_PASSWORD'] = '123'
 
 basic_auth = BasicAuth(app)
 
+# before launching server, create file or pass
 try:
     with open(articles_json, 'x') as file:
         file.write("[]")
@@ -97,6 +98,7 @@ def new_article():
 
     return render_template("admin_things/admin_new.html")
 
+# takes an id of the article to perform edits on
 @app.route("/admin/edit/<int:id>", methods=["GET", "POST"])
 def edit_article(id):
     with open(articles_json, 'r') as f:
@@ -121,7 +123,7 @@ def edit_article(id):
 
     return "Article not found", 404
 
-
+# takes an id of the article deletes it then saves the file
 @app.route("/admin/delete/<int:id>", methods=["POST"])
 def delete_article(id):
     with open(articles_json, 'r') as f:
