@@ -29,7 +29,7 @@ def guest_page():
 
 # an endpoint with <id> variable that takes the id of the article pressed on the site
 # opens up a new page with only that specific article
-@app.route("/article/<id>")
+@app.route("/article/<int:id>")
 def article(id):
     articles = []
     with open(articles_json, 'r') as f:
@@ -37,9 +37,9 @@ def article(id):
 
     for article in articles:
         if article['id'] == id:
-            return article
+            return render_template(article_file, one_article=article)
         
-    return render_template(article_file, one_article = article)
+    return "Article not found", 404
 
 # admin dashboard, log in via username and password
 # is used to add, edit, and delete articles
@@ -104,6 +104,19 @@ def edit_article(id):
             )
 
     return "Article not found", 404
+
+
+@app.route("/admin/delete/<int:id>", methods=["POST"])
+def delete_article(id):
+    with open(articles_json, 'r') as f:
+        articles = json.load(f)
+
+    new_articles = [d for d in articles if d.get('id') != id]
+
+    with open(articles_json, "w") as f:
+        json.dump(new_articles, f, indent=4)
+    
+    return {"message": "Article deleted"}
 
 if __name__ == "__main__":
     app.run(debug=True)
