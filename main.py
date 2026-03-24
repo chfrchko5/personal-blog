@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_basicauth import BasicAuth
 import json
 import datetime
+import os
 
 guest_file = "guest.html"
 admin_file = "admin.html"
@@ -16,12 +17,27 @@ app.config['BASIC_AUTH_PASSWORD'] = '123'
 
 basic_auth = BasicAuth(app)
 
+try:
+    with open(articles_json, 'x') as file:
+        file.write("[]")
+except FileExistsError:
+    print("File already exists. Content not overwritten.")
+
 # home/guest page is the default thats loaded
 # shows all the articles inside articles.json file
 # with an option to go into the admin dashboard
 @app.route("/")
 def guest_page():
     articles = []
+
+    if not os.path.exists(articles_json):
+        with open(articles_json, 'w') as f:
+            json.dump([], f)
+
+    if os.stat(articles_json).st_size == 0:
+        with open(articles_json, 'w') as f:
+            json.dump([], f)
+
     with open(articles_json, 'r') as f:
         articles = json.load(f)
         f.close()
